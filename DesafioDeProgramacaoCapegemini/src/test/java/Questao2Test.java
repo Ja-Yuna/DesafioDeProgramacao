@@ -9,14 +9,14 @@ public class Questao2Test {
 
 	@Test
 	public void loginOkTest() {
-		int teste = Questao2.efetuarLogin("teste1");
-		Assertions.assertEquals(teste, 0);		
+		boolean teste = Questao2.efetuarLogin("Ya3&ab");
+		Assertions.assertTrue(teste);		
 	}
 	
 	@Test
 	public void loginFailedTest() {
-		int teste = Questao2.efetuarLogin("Ya3");
-		Assertions.assertEquals(teste, 3);		
+		boolean teste = Questao2.efetuarLogin("Ya3");
+		Assertions.assertFalse(teste);		
 	}
 
 }

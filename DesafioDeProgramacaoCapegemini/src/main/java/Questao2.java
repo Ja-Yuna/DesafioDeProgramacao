@@ -1,6 +1,8 @@
 package main.java;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  * 
  * @author chaoz
@@ -10,13 +12,12 @@ public class Questao2 {
 	/**
 	 * 
 	 * @param senha método que recebe senha como entrada 
-	 * @return retorna quantidade de caracteres necessárias para senha segura
+	 * @return retorna se a senha é segura ou não
 	 */
-	public static int efetuarLogin(String senha) {
-		if(senha.length() < 6) {
-			return 6 - senha.length();
-		}		
-		return 0;		
+	public static boolean efetuarLogin(String senha) {
+		Pattern pattern = Pattern.compile("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+]).{6})");
+		Matcher matcher = pattern.matcher(senha);
+		return matcher.matches();
 	}
 
 	/**
@@ -29,7 +30,10 @@ public class Questao2 {
 		System.out.print("Senha: ");
 		String senha = s.nextLine();
 		s.close();
-
-		System.out.printf("%d", efetuarLogin(senha));		
+		
+		int quantidadeSenha = senha.length() <= 6 ? 6 - senha.length() : 0;
+		System.out.printf("%d", quantidadeSenha);
+						
+		System.out.print("\nSenha segura: " + (efetuarLogin(senha) ? "Sim" : "Não"));		
 	}
 }
